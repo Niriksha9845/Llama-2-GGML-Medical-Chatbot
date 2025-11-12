@@ -1,19 +1,18 @@
+
 import streamlit as st
 
-def generate_response(prompt):
-    prompt = prompt.lower()
-    if "fever" in prompt:
-        return "Fever is a temporary rise in body temperature often caused by infections."
-    if "headache" in prompt:
-        return "Headaches can be due to stress, dehydration, or lack of sleep — rest and fluids help."
-    return "This is a demo reply. For real medical advice, consult a healthcare professional."
+st.set_page_config(page_title="Albot (Demo)", layout="centered")
+st.title("🩺 Albot — Demo (Shareable)")
+st.write("This is a small demo version so you can show a working link to teachers/friends.")
 
-st.set_page_config(page_title="Albot — Demo", layout="centered")
-st.title("Albot — Demo (Lightweight)")
-st.write("This is a **small demo** version (safe for deploy).")
+q = st.text_input("Ask me something (try: fever, headache):")
 
-query = st.text_input("Ask a medical-related question:")
-if st.button("Ask") and query:
-    with st.spinner("Thinking..."):
-        resp = generate_response(query)
-    st.success(resp)
+if st.button("Get answer"):
+    if not q.strip():
+        st.warning("Type a question first.")
+    elif "fever" in q.lower():
+        st.success("Fever: often a sign your body is fighting infection. Rest + hydrate.")
+    elif "headache" in q.lower():
+        st.success("Headache: can be stress or dehydration. Try rest & water.")
+    else:
+        st.info("Sorry — demo can only answer simple prompts about fever/headache.")
